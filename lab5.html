@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: left;
+        }
+        .header h1 {
+            font-size: 2rem;
+        }
+        .header p {
+            font-size: 0.9rem;
+        }
+        .nav-tabs .nav-link {
+            color: #fff;
+            font-weight: bold;
+        }
+        .tab-content {
+            margin-top: 20px;
+        }
+        .filters, .search-bar {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .course-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin-bottom: 20px;
+            text-align: left;
+
+        }
+        .course-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .course-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        .progress {
+            height: 2px;
+            background-color: #e9ecef;
+        }
+        .progress-bar {
+            background-color: #9575cd;
+        }
+        .btn-rating {
+            color: #f39c12;
+            font-size: 1.0rem;
+        }
+        .filters-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        .rating-and-progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.0rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>My Learning</h1>
+    <p><b>87hr 36min</b> watched <i class="fa-solid fa-circle-exclamation"></i>  <a href="#" class="text-light"><b>View all activity</b></a></p>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="all-courses-tab" data-toggle="tab" href="#all-courses" role="tab">All courses</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="learning-paths-tab" data-toggle="tab" href="#learning-paths" role="tab">Learning paths</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="certifications-tab" data-toggle="tab" href="#certifications" role="tab">Certifications</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="archived-tab" data-toggle="tab" href="#archived" role="tab">Archived</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="learning-tools-tab" data-toggle="tab" href="#learning-tools" role="tab">Learning tools</a>
+        </li>
+    </ul>
+</div>
+
+<div class="container-fluid mt-4">
+
+    <!-- Tabs -->
+
+
+    <!-- Filters and Search -->
+
+
+    <!-- Courses Section -->
+    <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane fade show active" id="all-courses" role="tabpanel">
+            <div class="row filters mt-2">
+                <div class="col-md-3">
+                    <div class="filters-title">Sort by</div>
+                    <button class="btn btn-outline-secondary btn-sm btn-block"><b>Recently Accessed</b> <span class="float-right"><i class="fa-solid fa-chevron-down"></i></span></button>
+                </div>
+                <div class="col-md-6">
+                    <div class="filters-title">Filter by</div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-secondary btn-sm btn-block"><b>Categories</b> <span class="float-right"><i class="fa-solid fa-chevron-down"></i></span></button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-secondary btn-sm btn-block"><b>Progress</b> <span class="float-right"><i class="fa-solid fa-chevron-down"></i></span></button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-secondary btn-sm btn-block"><b>Instructor</b> <span class="float-right"><i class="fa-solid fa-chevron-down"></i></span></button>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-sm btn-block">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search my courses">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <!-- Course Card -->
+                <div class="col-md-3">
+                    <div class="course-card p-3">
+                        <div class="course-thumbnail">
+                            <img src="/assets/img/course1_lab5.png" alt="Course Thumbnail">
+                        </div>
+
+                        <h5 class="course-title mt-2">FPT_ISMS Refresh Training S2 2024 (Vietnamese)</h5>
+                        <p class="course-instructor mb-1">FSOFT Content Development</p>
+                        <!-- Progress Bar -->
+                        <div class="progress mt-1">
+                            <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <!-- Rating and Completion Percentage Row -->
+                        <div class="rating-and-progress">
+                            <span>80% complete</span>
+                            <span class="btn-rating">&#9734;&#9734;&#9734;&#9734;&#9734;</span>
+                        </div>
+                        <span class="float-right">Leave a rating</span>
+                    </div>
+                </div>
+                <!-- Course Card -->
+                <div class="col-md-3">
+                    <div class="course-card p-3">
+                        <!-- Course Thumbnail -->
+                        <div class="course-thumbnail">
+                            <img src="/assets/img/course4.png" alt="Course Thumbnail">
+                        </div>
+
+                        <!-- Course Details -->
+                        <h5 class="course-title mt-2">English Vocabulary: 504 Essential Words through 7...</h5>
+                        <p class="course-instructor mb-1">Mister Rabiey</p>
+
+                        <!-- Progress Bar -->
+                        <div class="progress mt-1">
+                            <div class="progress-bar" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <!-- Rating and Completion Percentage Row -->
+                        <div class="rating-and-progress">
+                            <span>15% complete</span>
+                            <span class="btn-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <span class="float-right">Your rating</span>
+                    </div>
+                </div>
+                <!-- Course Card -->
+                <div class="col-md-3">
+                    <div class="course-card p-3">
+                        <div class="course-thumbnail">
+                            <img src="/assets/img/course3_lab5.png" alt="Course Thumbnail">
+                        </div>
+
+                        <h5 class="course-title mt-2">MuleSoft 4.X Complete Guide For Beginners</h5>
+                        <p class="course-instructor mb-1">China Reddy</p>
+                        <!-- Progress Bar -->
+                        <div class="progress mt-1">
+                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <!-- Rating and Completion Percentage Row -->
+                        <div class="rating-and-progress">
+                            <span>100% complete</span>
+                            <span class="btn-rating">&#9734;&#9734;&#9734;&#9734;&#9734;</span>
+                        </div>
+                        <span class="float-right">Leave a rating</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="course-card p-3">
+                        <div class="course-thumbnail">
+                            <img src="/assets/img/course2_lab5.png" alt="Course Thumbnail">
+                        </div>
+
+                        <h5 class="course-title mt-2">The Complete Spring Boot Development Bootcamp</h5>
+                        <p class="course-instructor mb-1">
+                            Learn The Part Inc., Rayan Slim, Jose...
+                        </p>
+                        <!-- Progress Bar -->
+                        <div class="progress mt-1">
+                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <!-- Rating and Completion Percentage Row -->
+                        <div class="rating-and-progress">
+                            <span>100% complete</span>
+                            <span class="btn-rating">&#9734;&#9734;&#9734;&#9734;&#9734;</span>
+                        </div>
+                        <span class="float-right">Leave a rating</span>
+                    </div>
+                </div>
+                <!-- Course Card -->
+                <div class="col-md-3">
+                    <div class="course-card p-3">
+                        <!-- Course Thumbnail -->
+                        <div class="course-thumbnail">
+                            <img src="/assets/img/course5.png" alt="Course Thumbnail">
+                        </div>
+
+                        <!-- Course Details -->
+                        <h5 class="course-title mt-2">Build a Backend REST API
+                            with Python & Diango.
+                        </h5>
+                        <p class="course-instructor mb-1">Mister Rabiey</p>
+
+                        <!-- Progress Bar -->
+                        <div class="progress mt-1">
+                            <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <!-- Rating and Completion Percentage Row -->
+                        <div class="rating-and-progress">
+                            <span>30% complete</span>
+                            <span class="btn-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <span class="float-right">Your rating</span>
+                    </div>
+                </div>
+                <!-- Course Card -->
+                <div class="col-md-3">
+                    <div class="course-card p-3">
+                        <div class="course-thumbnail">
+                            <img src="/assets/img/course6.png" alt="Course Thumbnail">
+                        </div>
+
+                        <h5 class="course-title mt-2">ChatGPT Python Programming: Al Guided
+                        </h5>
+                        <p class="course-instructor mb-1">China Reddy</p>
+                        <!-- Progress Bar -->
+                        <div class="progress mt-1">
+                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <!-- Rating and Completion Percentage Row -->
+                        <div class="rating-and-progress">
+                            <span>100% complete</span>
+                            <span class="btn-rating">&#9734;&#9734;&#9734;&#9734;&#9734;</span>
+                        </div>
+                        <span class="float-right">Leave a rating</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="course-card p-3">
+                        <div class="course-thumbnail">
+                            <img src="/assets/img/course8.png" alt="Course Thumbnail">
+                        </div>
+
+                        <h5 class="course-title mt-2">PMP Certification FPT_PMP Training
+                        </h5>
+                        <p class="course-instructor mb-1">FPT, etc...</p>
+                        <!-- Progress Bar -->
+                        <div class="progress mt-1">
+                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <!-- Rating and Completion Percentage Row -->
+                        <div class="rating-and-progress">
+                            <span>100% complete</span>
+                            <span class="btn-rating">&#9734;&#9734;&#9734;&#9734;&#9734;</span>
+                        </div>
+                        <span class="float-right">Leave a rating</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="course-card p-3">
+                        <div class="course-thumbnail">
+                            <img src="/assets/img/course7.png" alt="Course Thumbnail">
+                        </div>
+
+                        <h5 class="course-title mt-2">Java Certification (1Z0-819) Topic-wise Tests Part-1
+                        </h5>
+                        <p class="course-instructor mb-1">Etc...</p>
+                        <!-- Progress Bar -->
+                        <div class="progress mt-1">
+                            <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <!-- Rating and Completion Percentage Row -->
+                        <div class="rating-and-progress">
+                            <span>50% complete</span>
+                            <span class="btn-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <span class="float-right">Your rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade " id="learning-paths" role="tabpanel">
+            <div class="row mt-4">
+
+                <!-- Learning Path Card 1 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card p-3 d-flex align-items-center" style="border: 1px solid #e1e4e8;">
+                        <div class="row align-items-center w-100">
+                            <!-- Logo on the left -->
+                            <div class="col-3">
+                                <img src="/assets/img/fpt.jpg" alt="FPT Logo" class="img-fluid" style="max-width: 50px;">
+                            </div>
+                            <!-- Content on the right -->
+                            <div class="col-9">
+                                <h6>Learning path</h6>
+                                <h5 class="learning-path-title mb-2">Induction Training_GAAFOFY (VI)</h5>
+                            </div>
+                        </div>
+
+                        <!-- Progress and Completion Information below the image and title -->
+                        <div class="mt-3 w-100">
+                            <p class="mb-1">1 of 6 items complete</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 16%;" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Path Card 2 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card p-3 d-flex align-items-center" style="border: 1px solid #e1e4e8;">
+                        <div class="row align-items-center w-100">
+                            <!-- Logo on the left -->
+                            <div class="col-3">
+                                <img src="/assets/img/fpt.jpg" alt="FPT Logo" class="img-fluid" style="max-width: 50px;">
+                            </div>
+                            <!-- Content on the right -->
+                            <div class="col-9">
+                                <h6>Learning path</h6>
+                                <h5 class="learning-path-title mb-2">Induction Training for BO_IT_Mandatory (VI)</h5>
+                            </div>
+                        </div>
+
+                        <!-- Progress and Completion Information below the image and title -->
+                        <div class="mt-3 w-100">
+                            <p class="mb-1">9 of 9 items complete</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

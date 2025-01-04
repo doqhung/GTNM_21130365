@@ -39,26 +39,28 @@
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
   }
+  const navbarlinks = select('#navbar .scrollto', true);
 
-  /**
-   * Navbar links active state on scroll
-   */
-  let navbarlinks = select('#navbar .scrollto', true)
   const navbarlinksActive = () => {
-    let position = window.scrollY + 200
-    navbarlinks.forEach(navbarlink => {
-      if (!navbarlink.hash) return
-      let section = select(navbarlink.hash)
-      if (!section) return
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
+    // Lấy tên file hiện tại
+    let currentPath = window.location.pathname.split('/').pop() || "index.html"; // Mặc định là index.html nếu rỗng
+
+    navbarlinks.forEach((navbarlink) => {
+      // Lấy giá trị href của mỗi liên kết
+      let linkPath = navbarlink.getAttribute('href');
+
+      // So sánh đường dẫn hiện tại với href
+      if (linkPath === currentPath) {
+        navbarlink.classList.add('active'); // Thêm class 'active' nếu khớp
       } else {
-        navbarlink.classList.remove('active')
+        navbarlink.classList.remove('active'); // Loại bỏ nếu không khớp
       }
-    })
-  }
-  window.addEventListener('load', navbarlinksActive)
-  onscroll(document, navbarlinksActive)
+    });
+  };
+
+// Gọi hàm khi trang load
+  window.addEventListener('load', navbarlinksActive);
+
 
   /**
    * Scrolls to an element with header offset
