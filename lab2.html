@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Coding Platform</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        #app {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .exercise-item {
+            cursor: pointer;
+        }
+        .exercise-item:hover {
+            background-color: #f9f9f9;
+        }
+        .completed {
+            background-color: #d4edda;
+        }
+        .in-progress {
+            background-color: #fff3cd;
+        }
+        .not-started {
+            background-color: #f8d7da;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div id="login-screen">
+        <h2 class="text-center">Login</h2>
+        <div class="form-group">
+            <input type="text" id="username" class="form-control" placeholder="Username/Email" required>
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" class="form-control" placeholder="Password" required>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="login()">Login</button>
+        <a href="#" class="d-block text-center mt-2">Forgot Password?</a>
+    </div>
+
+    <div id="dashboard" style="display: none;">
+        <h2 class="text-center">Exercise Dashboard</h2>
+        <div class="form-group">
+            <input type="text" id="search" class="form-control" placeholder="Search Exercises" oninput="filterExercises()">
+        </div>
+        <div class="form-group">
+            <select id="languageFilter" class="form-control" onchange="filterExercises()">
+                <option value="">All Languages</option>
+                <option value="C">C</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+            </select>
+        </div>
+        <div id="exercise-list"></div>
+    </div>
+
+    <div id="coding-environment" style="display: none;">
+        <h2 id="exercise-title" class="text-center"></h2>
+        <pre id="exercise-description" class="bg-light p-3"></pre>
+        <textarea id="code" class="form-control" rows="10" placeholder="Write your code here..."></textarea>
+        <button class="btn btn-success" onclick="runCode()">Run Code</button>
+        <button class="btn btn-secondary" onclick="clearCode()">Clear Code</button>
+        <button class="btn btn-warning" onclick="submitCode()">Submit Code</button>
+        <button class="btn btn-info" onclick="tryAgain()">Try Again</button>
+        <div id="test-results" class="mt-3"></div>
+        <div id="performance-metrics" class="mt-3"></div>
+        <button class="btn btn-info mt-2" onclick="backToDashboard()">Back to Dashboard</button>
+        <button class="btn btn-light mt-2" onclick="showHint()">Get Hint</button>
+        <div class="form-group mt-3">
+            <textarea id="feedback" class="form-control" rows="2" placeholder="Leave your feedback or ask for help..."></textarea>
+            <button class="btn btn-primary mt-2" onclick="submitFeedback()">Submit Feedback</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const exercises = [
+        { title: 'Hello World in C', description: 'Write a C program that prints Hello World.', language: 'C', status: 'not started', testCases: [{ input: '', expected: 'Hello World' }], hint: 'Use printf to display output.' },
+        { title: 'Basic Python Syntax', description: 'Learn the basics of Python.', language: 'Python', status: 'not started', testCases: [{ input: '', expected: 'Hello Python' }], hint: 'Use print() function for output.' },
+        { title: 'Java OOP Basics', description: 'Write a Java program that prints Hello Java.', language: 'Java', status: 'not started', testCases: [{ input: '', expected: 'Hello Java' }], hint: 'Remember to use System.out.println().' }
+    ];
+
+    let hintCount = 3;
+
+    function login() {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        displayExercises();
+    }
+
+    function displayExercises() {
+        const exerciseList = document.getElementById('exercise-list');
+        exerciseList.innerHTML = '';
+
+        exercises.forEach((exercise, index) => {
+            const div = document.createElement('div');
+            div.className = `exercise-item p-3 border mb-2 ${exercise.status}`;
+            div.innerHTML = `<strong>${exercise.title}</strong><p>${exercise.description}</p><small>Status: ${exercise.status.replace(/-/g, ' ')}</small>`;
+            div.onclick = () => selectExercise(index);
+            exerciseList.appendChild(div);
+        });
+    }
+
+    function filterExercises() {
+        const search = document.getElementById('search').value.toLowerCase();
+        const language = document.getElementById('languageFilter').value;
+        const filteredExercises = exercises.filter(exercise =>
+            exercise.title.toLowerCase().includes(search) &&
+            (language ? exercise.language === language : true)
+        );
+
+        const exerciseList = document.getElementById('exercise-list');
+        exerciseList.innerHTML = '';
+
+        filteredExercises.forEach((exercise, index) => {
+            const div = document.createElement('div');
+            div.className = `exercise-item p-3 border mb-2 ${exercise.status}`;
+            div.innerHTML = `<strong>${exercise.title}</strong><p>${exercise.description}</p><small>Status: ${exercise.status.replace(/-/g, ' ')}</small>`;
+            div.onclick = () => selectExercise(index);
+            exerciseList.appendChild(div);
+        });
+    }
+
+    function selectExercise(index) {
+        const exercise = exercises[index];
+        document.getElementById('exercise-title').innerText = exercise.title;
+        document.getElementById('exercise-description').innerText = exercise.description;
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('coding-environment').style.display = 'block';
+
+        // Update status to 'in progress'
+        exercise.status = 'in-progress';
+        displayExercises();
+
+        // Reset test results display
+        document.getElementById('test-results').innerHTML = '';
+        document.getElementById('performance-metrics').innerHTML = '';
+    }
+
+    function runCode() {
+        const code = document.getElementById('code').value;
+        const exerciseIndex = exercises.findIndex(exercise => exercise.title === document.getElementById('exercise-title').innerText);
+        const exercise = exercises[exerciseIndex];
+
+        const startTime = performance.now();
+        const testResults = exercise.testCases.map(testCase => {
+            const actualOutput = mockExecuteCode(code, testCase.input);
+            return {
+                input: testCase.input,
+                expected: testCase.expected,
+                actual: actualOutput,
+                status: (actualOutput.trim() === testCase.expected) ? 'Passed' : 'Failed'
+            };
+        });
+        const endTime = performance.now();
+
+        displayTestResults(testResults, endTime - startTime);
+    }
+
+    function mockExecuteCode(code, input) {
+        // Simulate code execution
+        if (code.includes('Hello World')) return 'Hello World';
+        if (code.includes('Hello Java')) return 'Hello Java';
+        if (code.includes('Hello Python')) return 'Hello Python';
+        return 'Compilation Error';
+    }
+
+    function displayTestResults(testResults, executionTime) {
+        const resultsDiv = document.getElementById('test-results');
+        resultsDiv.innerHTML = `<h4>Test Results:</h4>`;
+
+        let score = 0;
+
+        testResults.forEach(result => {
+            const resultDiv = document.createElement('div');
+            resultDiv.innerHTML = `
+                <strong>Input:</strong> ${result.input} <br>
+                <strong>Expected Output:</strong> ${result.expected} <br>
+                <strong>Actual Output:</strong> ${result.actual} <br>
+                <strong>Status:</strong> ${result.status} <br><br>
+            `;
+            resultsDiv.appendChild(resultDiv);
+            if (result.status === 'Passed') score++;
+        });
+
+        resultsDiv.innerHTML += `<strong>Total Passed: ${score} out of ${testResults.length}</strong>`;
+
+        // Display performance metrics
+        document.getElementById('performance-metrics').innerHTML = `
+            <strong>Execution Time:</strong> ${executionTime.toFixed(2)} ms <br>
+            <strong>Memory Used:</strong> N/A (Mock Execution)
+        `;
+    }
+
+    function clearCode() {
+        document.getElementById('code').value = '';
+    }
+
+    function submitCode() {
+        alert('Code submitted.');
+        const exerciseIndex = exercises.findIndex(exercise => exercise.title === document.getElementById('exercise-title').innerText);
+        exercises[exerciseIndex].status = 'completed';
+        displayExercises();
+    }
+
+    function tryAgain() {
+        document.getElementById('code').value = '';
+        document.getElementById('test-results').innerHTML = '';
+        document.getElementById('performance-metrics').innerHTML = '';
+    }
+
+    function backToDashboard() {
+        document.getElementById('coding-environment').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+    }
+
+    function showHint() {
+        const exerciseIndex = exercises.findIndex(exercise => exercise.title === document.getElementById('exercise-title').innerText);
+        const hint = exercises[exerciseIndex].hint;
+
+        if (hintCount > 0) {
+            alert(`Hint: ${hint}`);
+            hintCount--;
+        } else {
+            alert('No hints left.');
+        }
+    }
+
+    function submitFeedback() {
+        const feedback = document.getElementById('feedback').value;
+        alert(`Feedback submitted: ${feedback}`);
+        document.getElementById('feedback').value = '';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống chia sẻ tài liệu học tập</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .modal-content {
+            height: 90vh;
+        }
+        .lessons-list {
+            height: 100%;
+            overflow-y: auto;
+            border-right: 1px solid #ddd;
+        }
+        .lesson-content {
+            padding: 20px;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .lesson-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .modal-content {
+            width: 90%; /* Tăng chiều rộng */
+            height: 95vh; /* Tăng chiều cao */
+            margin: auto; /* Đảm bảo modal căn giữa */
+        }
+
+        .modal-dialog.modal-lg {
+            max-width: 95%; /* Giới hạn chiều rộng tối đa của modal */
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center my-4">Hệ thống chia sẻ tài liệu học tập</h1>
+
+    <div class="row">
+        <!-- Thẻ 1: Lập trình Java -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Lập trình Java</h5>
+                    <p class="card-text">Tìm hiểu về lập trình Java, từ căn bản đến nâng cao.</p>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#javaModal">Xem Tài Liệu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thẻ 2: Django Python -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Django Python</h5>
+                    <p class="card-text">Xây dựng ứng dụng web với Django framework.</p>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#djangoModal">Xem Tài Liệu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thẻ 3: Spring Framework -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Spring Framework</h5>
+                    <p class="card-text">Phát triển ứng dụng Java với Spring Framework.</p>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#springModal">Xem Tài Liệu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cho Lập trình Java -->
+    <div class="modal fade" id="javaModal" tabindex="-1" aria-labelledby="javaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="javaModalLabel">Tài liệu Lập trình Java</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex">
+                    <!-- Danh sách bài học -->
+                    <div class="lessons-list col-4 bg-light">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item active" data-lesson="javaLesson1">1. Introduction to Java</li>
+                            <li class="list-group-item" data-lesson="javaLesson2">2. Java Basics</li>
+                            <li class="list-group-item" data-lesson="javaLesson3">3. Object-Oriented Programming</li>
+                        </ul>
+                    </div>
+
+                    <!-- Nội dung bài học -->
+                    <div class="lesson-content col-8">
+                        <div id="javaLesson1">
+                            <div class="lesson-header">1. Introduction to Java</div>
+                            <iframe  src="assets/pdf/java_tutorial.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <div id="javaLesson2" class="hidden">
+                            <div class="lesson-header">2. Java Basics</div>
+                            <iframe  src="assets/pdf/java_tutorial.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <div id="javaLesson3" class="hidden">
+                            <div class="lesson-header">3. Object-Oriented Programming</div>
+                            <iframe  src="assets/pdf/java_tutorial.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <button class="btn btn-primary mt-3" id="backToJavaList">Back to list</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cho Django Python -->
+    <div class="modal fade" id="djangoModal" tabindex="-1" aria-labelledby="djangoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="djangoModalLabel">Tài liệu Django Python</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex">
+                    <!-- Danh sách bài học -->
+                    <div class="lessons-list col-4 bg-light">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item active" data-lesson="djangoLesson1">1. Introduction to Django</li>
+                            <li class="list-group-item" data-lesson="djangoLesson2">2. Setting Up Django</li>
+                            <li class="list-group-item" data-lesson="djangoLesson3">3. Django Models</li>
+                        </ul>
+                    </div>
+
+                    <!-- Nội dung bài học -->
+                    <div class="lesson-content col-8">
+                        <div id="djangoLesson1">
+                            <div class="lesson-header">1. Introduction to Django</div>
+                            <iframe  src="assets/pdf/Learning_Python.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <div id="djangoLesson2" class="hidden">
+                            <div class="lesson-header">2. Setting Up Django</div>
+                            <iframe  src="assets/pdf/Learning_Python.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <div id="djangoLesson3" class="hidden">
+                            <div class="lesson-header">3. Django Models</div>
+                            <iframe  src="assets/pdf/Learning_Python.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <button class="btn btn-primary mt-3" id="backToDjangoList">Back to list</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cho Spring Framework -->
+    <div class="modal fade" id="springModal" tabindex="-1" aria-labelledby="springModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="springModalLabel">Tài liệu Spring Framework</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex">
+                    <!-- Danh sách bài học -->
+                    <div class="lessons-list col-4 bg-light">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item active" data-lesson="springLesson1">1. Introduction to Spring</li>
+                            <li class="list-group-item" data-lesson="springLesson2">2. Spring Boot Basics</li>
+                            <li class="list-group-item" data-lesson="springLesson3">3. Dependency Injection</li>
+                        </ul>
+                    </div>
+
+                    <!-- Nội dung bài học -->
+                    <div class="lesson-content col-8">
+                        <div id="springLesson1">
+                            <div class="lesson-header">1. Introduction to Spring</div>
+                            <iframe  src="assets/pdf/spring-boot-reference.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <div id="springLesson2" class="hidden">
+                            <div class="lesson-header">2. Spring Boot Basics</div>
+                            <iframe  src="assets/pdf/spring-boot-reference.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <div id="springLesson3" class="hidden">
+                            <div class="lesson-header">3. Dependency Injection</div>
+                            <iframe  src="assets/pdf/spring-boot-reference.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <button class="btn btn-primary mt-3" id="backToSpringList">Back to list</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Script liên kết với Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Hàm để xử lý việc hiển thị nội dung bài học
+    function setupLessonClickEvents(lessonListSelector, lessonContentSelector) {
+        document.querySelectorAll(lessonListSelector).forEach(item => {
+            item.addEventListener('click', function () {
+                // Ẩn tất cả nội dung bài học
+                document.querySelectorAll(lessonContentSelector).forEach(content => content.classList.add('hidden'));
+
+                // Hiển thị nội dung tương ứng với bài học được chọn
+                const lessonId = this.getAttribute('data-lesson');
+                document.getElementById(lessonId).classList.remove('hidden');
+
+                // Cập nhật trạng thái mục bài học đang hoạt động
+                document.querySelectorAll(lessonListSelector).forEach(li => li.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    }
+
+    // Thiết lập sự kiện cho từng modal
+    setupLessonClickEvents('#javaModal .lessons-list .list-group-item', '#javaModal .lesson-content > div');
+    setupLessonClickEvents('#djangoModal .lessons-list .list-group-item', '#djangoModal .lesson-content > div');
+    setupLessonClickEvents('#springModal .lessons-list .list-group-item', '#springModal .lesson-content > div');
+
+    // Xử lý sự kiện khi nhấn nút "Back to list"
+    document.getElementById('backToJavaList').addEventListener('click', function () {
+        $('#javaModal').modal('hide');
+    });
+    document.getElementById('backToDjangoList').addEventListener('click', function () {
+        $('#djangoModal').modal('hide');
+    });
+    document.getElementById('backToSpringList').addEventListener('click', function () {
+        $('#springModal').modal('hide');
+    });
+</script>
+
+</body>
+</html>
